@@ -1,21 +1,18 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Login from './page/login/Login';
+import Main from './page/main/Main';
 import './reset.css';
 
 function App() {
   return (
-    <div>
-      <h1>Router Test</h1>
-      <nav
-        style={{
-          borderBottom: 'solid 1px',
-          paddingBottom: '1rem',
-        }}
-      >
-        <Link to='/main'>Go to main page</Link> |{' '}
-        <Link to='/login'>Go to Login page</Link>
-      </nav>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Login />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/main' element={<Main />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

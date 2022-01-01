@@ -7,6 +7,10 @@ const style = css`
       'Helvetica Neue', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: #636263;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   code {

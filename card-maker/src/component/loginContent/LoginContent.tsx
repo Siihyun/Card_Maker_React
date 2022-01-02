@@ -1,11 +1,16 @@
 import styled from '@emotion/styled';
 
-const LoginContent = () => {
+interface Props {
+  googleLogin: () => void;
+  githubLogin: () => void;
+}
+
+const LoginContent = ({ googleLogin, githubLogin }: Props) => {
   return (
     <LoginWrapper>
       <LoginTitle>Login</LoginTitle>
-      <LoginMethod>Google</LoginMethod>
-      <LoginMethod>Github</LoginMethod>
+      <LoginMethod onClick={googleLogin}>Google</LoginMethod>
+      <LoginMethod onClick={githubLogin}>Github</LoginMethod>
     </LoginWrapper>
   );
 };

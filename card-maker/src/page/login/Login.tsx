@@ -2,12 +2,14 @@ import styled from '@emotion/styled';
 import Footer from '../../component/footer/Footer';
 import Header from '../../component/header/Header';
 import LoginContent from '../../component/loginContent/LoginContent';
+import googleLogin from '../../service/googleLogin';
+import githubLogin from '../../service/githubLogin';
 
 const Login = () => {
   return (
     <LoginWrapper>
       <Header />
-      <LoginContent />
+      <LoginContent googleLogin={googleLogin} githubLogin={githubLogin} />
       <Footer />
     </LoginWrapper>
   );

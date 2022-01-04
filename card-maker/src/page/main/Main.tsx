@@ -1,13 +1,27 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import Header from '../../component/header/Header';
+import Footer from '../../component/footer/Footer';
+import MainContent from '../../component/mainContent/MainContent';
+import LogoutButton from '../../component/logoutButton/LogoutButton';
 
 const Main = () => {
-  return <SomeText>MainPage</SomeText>;
+  return (
+    <MainWrapper>
+      <Header />
+      <LogoutButton />
+      <MainContent />
+      <Footer />
+    </MainWrapper>
+  );
 };
 
-const SomeText = styled.div`
-  color: ${({ theme }) => theme.colors.makerPink};
-  border: 3px solid ${(props) => props.theme.colors.makerBlack};
+const MainWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
 `;
 
 export default Main;

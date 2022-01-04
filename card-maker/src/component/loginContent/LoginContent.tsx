@@ -1,16 +1,31 @@
 import styled from '@emotion/styled';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
-  googleLogin: () => void;
-  githubLogin: () => void;
+  googleLogin: () => Promise<boolean>;
+  githubLogin: () => Promise<boolean>;
 }
 
 const LoginContent = ({ googleLogin, githubLogin }: Props) => {
+  const navigate = useNavigate();
+
+  const handleGoogleLogin = () => {
+    googleLogin().then((result) => {
+      if (result) navigate('/main');
+    });
+  };
+
+  const handleGithubLogin = () => {
+    githubLogin().then((result) => {
+      if (result) navigate('/main');
+    });
+  };
+
   return (
     <LoginWrapper>
       <LoginTitle>Login</LoginTitle>
-      <LoginMethod onClick={googleLogin}>Google</LoginMethod>
-      <LoginMethod onClick={githubLogin}>Github</LoginMethod>
+      <LoginMethod onClick={handleGoogleLogin}>Google</LoginMethod>
+      <LoginMethod onClick={handleGithubLogin}>Github</LoginMethod>
     </LoginWrapper>
   );
 };

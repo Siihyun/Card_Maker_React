@@ -1,16 +1,17 @@
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import firebaseApp from './firebase';
 
-const googleLogin = () => {
+const googleLogin = async (): Promise<boolean> => {
   const provider = new GoogleAuthProvider();
   const auth = getAuth(firebaseApp);
 
-  signInWithPopup(auth, provider)
+  return signInWithPopup(auth, provider)
     .then(() => {
-      console.log('login succeeded');
+      return true;
     })
     .catch(() => {
-      alert('login 과정에서 error가 발생하였습니다.');
+      alert('login중 에러가 발생하였습니다.');
+      return false;
     });
 };
 

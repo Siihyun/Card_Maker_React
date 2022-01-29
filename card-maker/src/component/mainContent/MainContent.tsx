@@ -1,14 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import CardPreview from '../cardPreview/CardPreview';
 import CardMaker from '../cardMaker/CardMaker';
 
+export interface Card {
+  name: string;
+  company: string;
+  color: 'light' | 'dark' | 'Colorful';
+  mail: string;
+  message: string;
+}
+
 const MainContent = () => {
+  const [cards, setCards] = useState<Card[]>([]);
+
   return (
     <MainWrapper>
-      <CardMaker />
+      <CardMaker cards={cards} setCards={setCards} />
       <Seperator />
-      <CardPreview />
+      <CardPreview cards={cards} setCards={setCards} />
     </MainWrapper>
   );
 };

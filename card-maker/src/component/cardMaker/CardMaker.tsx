@@ -1,8 +1,14 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import MakerItem from './MakerItem';
+import { Card } from '../mainContent/MainContent';
 
-const CardMaker = () => {
+interface Props {
+  cards: Card[];
+  setCards: React.Dispatch<React.SetStateAction<Card[]>>;
+}
+
+const CardMaker = ({ cards, setCards }: Props) => {
   return (
     <CardMakerWrapper>
       <Title>CardMaker</Title>

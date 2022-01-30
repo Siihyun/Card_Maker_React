@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import MakerItem from './MakerItem';
-import { Card } from '../mainContent/MainContent';
+import MakerItem from '@/component/cardMaker/MakerItem';
+import { Card } from '@/component/mainContent/MainContent';
 
 interface Props {
   cards: Card[];

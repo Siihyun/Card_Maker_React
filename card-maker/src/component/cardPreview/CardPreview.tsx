@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { Card } from '../mainContent/MainContent';
+import { Card } from '@/component/mainContent/MainContent';
 
 interface Props {
   cards: Card[];

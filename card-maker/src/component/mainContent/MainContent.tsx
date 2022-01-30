@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
-import CardPreview from '../cardPreview/CardPreview';
-import CardMaker from '../cardMaker/CardMaker';
+import CardPreview from '@/component/cardPreview/CardPreview';
+import CardMaker from '@/component/cardMaker/CardMaker';
 
 export interface Card {
   name: string;

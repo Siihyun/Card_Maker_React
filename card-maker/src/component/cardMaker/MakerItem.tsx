@@ -1,12 +1,17 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { Card } from '../mainContent/MainContent';
 
-const MakerItem = () => {
+interface Props {
+  card: Card;
+}
+
+const MakerItem = ({ card }: Props) => {
   return (
     <ListItemWrapper>
       <FlexWrapper>
-        <Input></Input>
-        <Input></Input>
+        <Input />
+        <Input />
         <Select>
           <option>Light</option>
           <option>Dark</option>
@@ -14,11 +19,11 @@ const MakerItem = () => {
         </Select>
       </FlexWrapper>
       <FlexWrapper>
-        <Input></Input>
-        <Input></Input>
+        <Input />
+        <Input />
       </FlexWrapper>
       <FlexWrapper>
-        <Input></Input>
+        <Input />
       </FlexWrapper>
       <FlexWrapper>
         <UploadButton>me</UploadButton>
@@ -29,7 +34,6 @@ const MakerItem = () => {
 };
 
 const ListItemWrapper = styled.li`
-  width: 100%;
   list-style: none;
   border: 1px solid ${({ theme }) => theme.colors.makerGrey};
 `;

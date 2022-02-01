@@ -51,6 +51,9 @@ const LoginMethod = styled.div`
   border: 2px solid ${({ theme }) => theme.colors.makerGreen};
   border-radius: 1rem;
   cursor: pointer;
+  :hover {
+    background-color: ${({ theme }) => theme.colors.makerLightPink};
+  }
 `;
 
 export default LoginContent;

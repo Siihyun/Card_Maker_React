@@ -1,32 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from '@emotion/styled';
-import { Cards } from '../mainContent/MainContent';
 import { firebaseDB } from '@/service/firebase';
 import { ref, set } from 'firebase/database';
+import { Card, Cards } from '@/component/mainContent/MainContent';
+import { v4 as uuidv4 } from 'uuid';
 
 interface Props {
-  id: string;
   cards: Cards;
 }
 
-const MakerItem = ({ id, cards }: Props) => {
-  const card = cards[id];
+const RegisterItem = ({ cards }: Props) => {
+  const defaultState: Card = {
+    name: '',
+    company: '',
+    color: 'light',
+    email: '',
+    title: '',
+    message: '',
+  };
+  const [card, setCard] = useState<Card>(defaultState);
 
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
     >
   ) => {
-    set(ref(firebaseDB), {
-      ...cards,
-      [id]: { ...card, [e.target.name]: e.target.value },
-    });
+    setCard({ ...card, [e.target.name]: e.target.value });
   };
 
-  const handleDelete = () => {
-    const newObj = { ...cards };
-    delete newObj[id];
-    set(ref(firebaseDB), newObj);
+  const handleAdd = () => {
+    const id = uuidv4();
+    set(ref(firebaseDB), {
+      ...cards,
+      [id]: { id, ...card },
+    });
+    setCard(defaultState);
   };
 
   return (
@@ -73,55 +81,49 @@ const MakerItem = ({ id, cards }: Props) => {
         />
       </FlexWrapper>
       <FlexWrapper>
-        <UploadButton url={card.url}>
-          {card.url ? card.name : 'No File'}
-        </UploadButton>
-        <DeleteButton onClick={handleDelete}>delete</DeleteButton>
+        <UploadButton>No File</UploadButton>
+        <AddButton onClick={handleAdd}>add</AddButton>
       </FlexWrapper>
     </ListItemWrapper>
   );
 };
 
-type UploadButtonInterface = {
-  url?: string;
-};
-
-const ListItemWrapper = styled.li`
+export const ListItemWrapper = styled.li`
+  width: 100%;
   list-style: none;
   border: 1px solid ${({ theme }) => theme.colors.makerGrey};
   margin-bottom: 2rem;
 `;
 
-const FlexWrapper = styled.div`
+export const FlexWrapper = styled.div`
   display: flex;
 `;
 
-const Input = styled.input`
+export const Input = styled.input`
   flex: 1;
   padding: 0.5rem;
   height: 2rem;
 `;
 
-const Textarea = styled.textarea`
+export const Textarea = styled.textarea`
   flex: 1;
   height: 3rem;
   padding: 0.5rem;
   resize: vertical;
 `;
 
-const Select = styled.select`
+export const Select = styled.select`
   flex: 1;
 `;
 
-const UploadButton = styled.button<UploadButtonInterface>`
+export const UploadButton = styled.button`
   flex: 1;
-  background-color: ${({ url, theme }) =>
-    url ? theme.colors.makerPink : theme.colors.makerLightGrey};
+  background-color: ${({ theme }) => theme.colors.makerLightGrey};
   font-weight: bold;
   height: 1.5rem;
 `;
 
-const DeleteButton = styled.button`
+export const AddButton = styled.button`
   flex: 1;
   background-color: ${({ theme }) => theme.colors.makerGreen};
   color: ${({ theme }) => theme.colors.makerWhite};
@@ -129,4 +131,4 @@ const DeleteButton = styled.button`
   height: 1.5rem;
 `;
 
-export default MakerItem;
+export default RegisterItem;

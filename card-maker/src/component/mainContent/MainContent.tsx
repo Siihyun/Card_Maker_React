@@ -6,11 +6,14 @@ import { firebaseDB } from '@/service/firebase';
 import { ref, onValue } from '@firebase/database';
 
 export interface Card {
+  id?: string;
   name: string;
   company: string;
   color: 'light' | 'dark' | 'Colorful';
-  mail: string;
+  email: string;
+  title: string;
   message: string;
+  url?: string;
 }
 
 export interface Cards {
@@ -20,20 +23,23 @@ export interface Cards {
 const MainContent = () => {
   const [cards, setCards] = useState<Cards>({});
   const dbRef = ref(firebaseDB);
-  console.log(cards);
 
   useEffect(() => {
     onValue(dbRef, (snapshot) => {
-      const data: Cards = snapshot.val();
-      setCards(data);
+      const cards: Cards | null = snapshot.val();
+      if (cards === null) {
+        setCards({});
+        return;
+      }
+      setCards(cards);
     });
   }, [dbRef]);
 
   return (
     <MainWrapper>
-      <CardMaker cards={cards} setCards={setCards} />
+      <CardMaker cards={cards} />
       <Seperator />
-      <CardPreview cards={cards} setCards={setCards} />
+      <CardPreview cards={cards} />
     </MainWrapper>
   );
 };

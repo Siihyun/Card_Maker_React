@@ -5,14 +5,13 @@ import MakerItem from '@/component/cardMaker/MakerItem';
 
 interface Props {
   cards: Cards;
-  setCards: React.Dispatch<React.SetStateAction<Cards>>;
 }
 
-const MakerList = ({ cards, setCards }: Props) => {
+const MakerList = ({ cards }: Props) => {
   return (
     <ListWrapper>
       {Object.keys(cards).map((key) => (
-        <MakerItem key={key} card={cards[key]} />
+        <MakerItem key={key} id={key} cards={cards} />
       ))}
     </ListWrapper>
   );

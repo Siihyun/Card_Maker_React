@@ -1,20 +1,19 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import MakerItem from '@/component/cardMaker/MakerItem';
 import { Cards } from '@/component/mainContent/MainContent';
 import MakerList from '@/component/cardMaker/MakerList';
+import RegisterItem from '@/component/cardMaker/RegisterItem';
 
 interface Props {
   cards: Cards;
-  setCards: React.Dispatch<React.SetStateAction<Cards>>;
 }
 
-const CardMaker = ({ cards, setCards }: Props) => {
+const CardMaker = ({ cards }: Props) => {
   return (
     <CardMakerWrapper>
       <Title>CardMaker</Title>
-      <MakerList cards={cards} setCards={setCards} />
-      {/* <MakerItem /> */}
+      <MakerList cards={cards} />
+      <RegisterItem cards={cards} />
     </CardMakerWrapper>
   );
 };

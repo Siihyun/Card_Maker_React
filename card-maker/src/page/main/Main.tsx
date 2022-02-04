@@ -7,20 +7,29 @@ import LogoutButton from '@/component/logoutButton/LogoutButton';
 
 const Main = () => {
   return (
-    <MainWrapper>
-      <Header />
-      <LogoutButton />
-      <MainContent />
-      <Footer />
-    </MainWrapper>
+    <AppWrapper>
+      <MainWrapper>
+        <Header />
+        <LogoutButton />
+        <MainContent />
+        <Footer />
+      </MainWrapper>
+    </AppWrapper>
   );
 };
+
+const AppWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+`;
 
 const MainWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100vw;
-  height: 100vh;
+  max-height: 100%;
   position: relative;
 `;
 

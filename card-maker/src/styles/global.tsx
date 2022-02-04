@@ -8,9 +8,6 @@ const style = css`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background-color: #636263;
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 
   code {
@@ -134,6 +131,10 @@ const style = css`
     overflow-wrap: break-word;
     -moz-tab-size: 4;
     tab-size: 4;
+  }
+
+  #root {
+    height: 100%;
   }
 `;
 

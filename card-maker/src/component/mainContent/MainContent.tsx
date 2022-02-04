@@ -5,12 +5,6 @@ import CardMaker from '@/component/cardMaker/CardMaker';
 import { firebaseDB } from '@/service/firebase';
 import { ref, onValue } from '@firebase/database';
 
-import { jsx, css } from '@emotion/react';
-
-const breakpoints = [576, 768, 992, 1200];
-
-const mq = breakpoints.map((bp) => `@media (min-width: ${bp}px)`);
-
 export interface Card {
   id?: string;
   name: string;

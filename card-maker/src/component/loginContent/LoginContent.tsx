@@ -1,22 +1,19 @@
 import styled from '@emotion/styled';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
+type socialMethod = 'Github' | 'Google';
+
 interface Props {
-  googleLogin: () => Promise<boolean>;
-  githubLogin: () => Promise<boolean>;
+  socialLogin: (method: socialMethod) => Promise<boolean>;
 }
 
-const LoginContent = ({ googleLogin, githubLogin }: Props) => {
+const LoginContent = ({ socialLogin }: Props) => {
   const navigate = useNavigate();
 
-  const handleGoogleLogin = () => {
-    googleLogin().then((result) => {
-      if (result) navigate('/main');
-    });
-  };
-
-  const handleGithubLogin = () => {
-    githubLogin().then((result) => {
+  const handleSocialLogin = (e: React.MouseEvent<HTMLElement>) => {
+    const method = e.currentTarget.textContent as socialMethod;
+    socialLogin(method).then((result) => {
       if (result) navigate('/main');
     });
   };
@@ -24,8 +21,8 @@ const LoginContent = ({ googleLogin, githubLogin }: Props) => {
   return (
     <LoginWrapper>
       <LoginTitle>Login</LoginTitle>
-      <LoginMethod onClick={handleGoogleLogin}>Google</LoginMethod>
-      <LoginMethod onClick={handleGithubLogin}>Github</LoginMethod>
+      <LoginMethod onClick={handleSocialLogin}>Google</LoginMethod>
+      <LoginMethod onClick={handleSocialLogin}>Github</LoginMethod>
     </LoginWrapper>
   );
 };
@@ -42,8 +39,9 @@ const LoginTitle = styled.h1`
   text-align: center;
 `;
 
-const LoginMethod = styled.div`
+const LoginMethod = styled.button`
   display: flex;
+  width: 100%;
   justify-content: center;
   align-items: center;
   padding: 0.75rem;

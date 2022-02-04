@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import { Cards } from '../mainContent/MainContent';
 import { firebaseDB } from '@/service/firebase';
 import { ref, set } from 'firebase/database';
+import uploadImage from '@/service/cloudinary';
 
 interface Props {
   id: string;
@@ -27,6 +28,24 @@ const MakerItem = ({ id, cards }: Props) => {
     const newObj = { ...cards };
     delete newObj[id];
     set(ref(firebaseDB), newObj);
+  };
+
+  const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.currentTarget.files) {
+      const file = e.currentTarget.files[0];
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append(
+        'upload_preset',
+        process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET!
+      );
+      formData.append('api_key', process.env.REACT_APP_CLOUDINARY_API_KEY!);
+      const { url } = await uploadImage(formData);
+      set(ref(firebaseDB), {
+        ...cards,
+        [id]: { ...card, url },
+      });
+    }
   };
 
   return (
@@ -73,9 +92,10 @@ const MakerItem = ({ id, cards }: Props) => {
         />
       </FlexWrapper>
       <FlexWrapper>
-        <UploadButton url={card.url}>
+        <UploadLabel url={card.url} htmlFor={id}>
           {card.url ? card.name : 'No File'}
-        </UploadButton>
+        </UploadLabel>
+        <UploadButton onChange={handleUpload} type='file' id={id} />
         <DeleteButton onClick={handleDelete}>delete</DeleteButton>
       </FlexWrapper>
     </ListItemWrapper>
@@ -113,20 +133,30 @@ const Select = styled.select`
   flex: 1;
 `;
 
-const UploadButton = styled.button<UploadButtonInterface>`
-  flex: 1;
-  background-color: ${({ url, theme }) =>
-    url ? theme.colors.makerPink : theme.colors.makerLightGrey};
-  font-weight: bold;
-  height: 1.5rem;
-`;
-
 const DeleteButton = styled.button`
   flex: 1;
   background-color: ${({ theme }) => theme.colors.makerGreen};
   color: ${({ theme }) => theme.colors.makerWhite};
   font-weight: bold;
   height: 1.5rem;
+`;
+
+const UploadLabel = styled.label<UploadButtonInterface>`
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: ${({ url, theme }) =>
+    url ? theme.colors.makerPink : theme.colors.makerLightGrey};
+  font-weight: bold;
+  height: 1.5rem;
+  cursor: pointer;
+  font-size: 13px;
+  font-family: Arial;
+`;
+
+const UploadButton = styled.input`
+  display: none;
 `;
 
 export default MakerItem;

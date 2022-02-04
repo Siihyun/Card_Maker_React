@@ -9,7 +9,7 @@ const Header = () => {
   );
 };
 
-const HeaderWrapper = styled.div`
+const HeaderWrapper = styled.header`
   display: flex;
   flex-direction: column;
   justify-content: center;

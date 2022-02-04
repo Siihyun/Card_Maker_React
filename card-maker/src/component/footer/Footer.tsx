@@ -1,10 +1,14 @@
 import styled from '@emotion/styled';
 
 const Footer = () => {
-  return <FooterText>Code your dream</FooterText>;
+  return (
+    <FooterWrapper>
+      <FooterText>Code your dream</FooterText>
+    </FooterWrapper>
+  );
 };
 
-const FooterText = styled.div`
+const FooterWrapper = styled.footer`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,5 +16,7 @@ const FooterText = styled.div`
   color: ${({ theme }) => theme.colors.makerWhite};
   background-color: ${({ theme }) => theme.colors.makerGreen};
 `;
+
+const FooterText = styled.p``;
 
 export default Footer;

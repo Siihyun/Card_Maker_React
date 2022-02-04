@@ -49,6 +49,7 @@ const LoginMethod = styled.button`
   border: 2px solid ${({ theme }) => theme.colors.makerGreen};
   border-radius: 1rem;
   cursor: pointer;
+  font-size: 1rem;
   :hover {
     background-color: ${({ theme }) => theme.colors.makerLightPink};
   }

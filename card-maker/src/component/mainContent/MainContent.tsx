@@ -46,6 +46,7 @@ const MainContent = () => {
 const MainWrapper = styled.div`
   display: flex;
   background-color: ${({ theme }) => theme.colors.makerWhite};
+  min-height: 0;
   @media (max-width: ${({ theme }) => theme.sizes.mediaQuery}) {
     flex-direction: column;
   }

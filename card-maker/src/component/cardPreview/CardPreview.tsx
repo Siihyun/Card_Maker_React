@@ -22,6 +22,7 @@ const CardPreviewWrapper = styled.section`
   align-items: center;
   flex-basis: 50%;
   padding: 2rem 1rem;
+  overflow-y: auto;
 `;
 
 const Title = styled.h1`

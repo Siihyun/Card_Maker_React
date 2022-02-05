@@ -38,7 +38,6 @@ const MainContent = () => {
   return (
     <MainWrapper>
       <CardMaker cards={cards} />
-      <Seperator />
       <CardPreview cards={cards} />
     </MainWrapper>
   );
@@ -49,14 +48,6 @@ const MainWrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.makerWhite};
   @media (max-width: ${({ theme }) => theme.sizes.mediaQuery}) {
     flex-direction: column;
-  }
-`;
-
-const Seperator = styled.div`
-  width: 1px;
-  background-color: ${({ theme }) => theme.colors.makerLightGrey};
-  @media (max-width: ${({ theme }) => theme.sizes.mediaQuery}) {
-    display: none;
   }
 `;
 

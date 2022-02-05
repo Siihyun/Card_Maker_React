@@ -22,8 +22,9 @@ const CardMakerWrapper = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  flex: 1;
+  flex-basis: 50%;
   padding: 2rem 1rem;
+  border-right: 1px solid ${({ theme }) => theme.colors.makerLightGrey};
 `;
 
 const Title = styled.h1`

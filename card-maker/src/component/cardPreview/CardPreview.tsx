@@ -20,7 +20,7 @@ const CardPreviewWrapper = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  flex: 1;
+  flex-basis: 50%;
   padding: 2rem 1rem;
 `;
 

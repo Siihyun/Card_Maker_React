@@ -28,7 +28,7 @@ const AppWrapper = styled.div`
 const MainWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100vw;
+  width: 80%;
   max-height: 100%;
   position: relative;
 `;

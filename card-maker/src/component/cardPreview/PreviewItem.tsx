@@ -33,6 +33,8 @@ const ListItemWrapper = styled.li<ListInterface>`
   display: flex;
   align-items: center;
   list-style: none;
+  width: 100%;
+  max-width: 30rem;
   border-radius: 1rem;
   box-shadow: 4px 4px 0px -1px ${({ theme }) => theme.colors.makerLightGrey};
   background: ${({ theme, color }) =>

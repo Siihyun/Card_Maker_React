@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import { Cards } from '../mainContent/MainContent';
 import { firebaseDB } from '@/service/firebase';
 import { ref, set } from 'firebase/database';
 import uploadImage from '@/service/cloudinary';
+import { keyframes } from '@emotion/react';
 
 interface Props {
   id: string;
@@ -11,6 +12,7 @@ interface Props {
 }
 
 const MakerItem = ({ id, cards }: Props) => {
+  const [isLoading, setIsLoading] = useState(false);
   const card = cards[id];
 
   const handleChange = (
@@ -32,6 +34,7 @@ const MakerItem = ({ id, cards }: Props) => {
 
   const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.currentTarget.files) {
+      setIsLoading(true);
       const file = e.currentTarget.files[0];
       const formData = new FormData();
       formData.append('file', file);
@@ -45,59 +48,61 @@ const MakerItem = ({ id, cards }: Props) => {
         ...cards,
         [id]: { ...card, url },
       });
+      setIsLoading(false);
     }
   };
 
   return (
     <ListItemWrapper>
-      <FlexWrapper>
-        <Input
-          placeholder='Name'
-          name='name'
-          value={card.name}
-          onChange={handleChange}
-        />
-        <Input
-          placeholder='Company'
-          name='company'
-          value={card.company}
-          onChange={handleChange}
-        />
-        <Select name='color' value={card.color} onChange={handleChange}>
-          <option>Light</option>
-          <option>Dark</option>
-          <option>Colorful</option>
-        </Select>
-      </FlexWrapper>
-      <FlexWrapper>
-        <Input
-          placeholder='Title'
-          name='title'
-          value={card.title}
-          onChange={handleChange}
-        />
-        <Input
-          placeholder='Email'
-          name='email'
-          value={card.email}
-          onChange={handleChange}
-        />
-      </FlexWrapper>
-      <FlexWrapper>
-        <Textarea
-          placeholder='Message'
-          name='message'
-          value={card.message}
-          onChange={handleChange}
-        />
-      </FlexWrapper>
-      <FlexWrapper>
+      <Input
+        placeholder='Name'
+        name='name'
+        value={card.name}
+        onChange={handleChange}
+      />
+      <Input
+        placeholder='Company'
+        name='company'
+        value={card.company}
+        onChange={handleChange}
+      />
+      <Select name='color' value={card.color} onChange={handleChange}>
+        <option>Light</option>
+        <option>Dark</option>
+        <option>Colorful</option>
+      </Select>
+
+      <Input
+        placeholder='Title'
+        name='title'
+        value={card.title}
+        onChange={handleChange}
+      />
+      <Input
+        placeholder='Email'
+        name='email'
+        value={card.email}
+        onChange={handleChange}
+      />
+
+      <Textarea
+        placeholder='Message'
+        name='message'
+        value={card.message}
+        onChange={handleChange}
+      />
+      {!isLoading && (
         <UploadLabel url={card.url} htmlFor={id}>
           {card.url ? card.name : 'No File'}
         </UploadLabel>
-        <UploadButton onChange={handleUpload} type='file' id={id} />
-        <DeleteButton onClick={handleDelete}>delete</DeleteButton>
-      </FlexWrapper>
+      )}
+      {isLoading && (
+        <LoadingWrapper>
+          <Loading />
+        </LoadingWrapper>
+      )}
+      <UploadButton onChange={handleUpload} type='file' id={id} />
+      <DeleteButton onClick={handleDelete}>delete</DeleteButton>
     </ListItemWrapper>
   );
 };
@@ -107,30 +112,28 @@ type UploadButtonInterface = {
 };
 
 const ListItemWrapper = styled.li`
+  display: flex;
+  flex-wrap: wrap;
   list-style: none;
   border: 1px solid ${({ theme }) => theme.colors.makerGrey};
   margin-bottom: 2rem;
 `;
 
-const FlexWrapper = styled.div`
-  display: flex;
-`;
-
 const Input = styled.input`
-  flex: 1;
+  flex: 1 1 30%;
   padding: 0.5rem;
   height: 2rem;
 `;
 
 const Textarea = styled.textarea`
-  flex: 1;
+  flex-basis: 100%;
   height: 3rem;
   padding: 0.5rem;
   resize: vertical;
 `;
 
 const Select = styled.select`
-  flex: 1;
+  flex: 1 1 30%;
 `;
 
 const DeleteButton = styled.button`
@@ -153,6 +156,30 @@ const UploadLabel = styled.label<UploadButtonInterface>`
   cursor: pointer;
   font-size: 13px;
   font-family: Arial;
+`;
+
+const spin = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+`;
+
+const LoadingWrapper = styled.div`
+  flex: 1;
+  display: flex;
+  justify-content: center;
+`;
+
+const Loading = styled.div`
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  border: 3px solid ${({ theme }) => theme.colors.makerLightGrey};
+  border-top: 3px solid ${({ theme }) => theme.colors.makerPink};
+  animation: ${spin} 2s linear infinite;
 `;
 
 const UploadButton = styled.input`

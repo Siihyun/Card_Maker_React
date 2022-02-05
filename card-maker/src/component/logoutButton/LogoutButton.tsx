@@ -1,10 +1,21 @@
 import { useCallback } from 'react';
 import styled from '@emotion/styled';
 import { useNavigate } from 'react-router-dom';
+import { getAuth, signOut } from 'firebase/auth';
 
 const LogoutButton = () => {
   const navigate = useNavigate();
   const handleOnclick = useCallback(() => {
+    const auth = getAuth();
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+        console.log('success');
+      })
+      .catch((error) => {
+        // An error happened.
+        console.log(error);
+      });
     navigate('/login');
   }, [navigate]);
 

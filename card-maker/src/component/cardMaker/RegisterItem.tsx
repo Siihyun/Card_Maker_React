@@ -39,81 +39,73 @@ const RegisterItem = ({ cards }: Props) => {
 
   return (
     <ListItemWrapper>
-      <FlexWrapper>
-        <Input
-          placeholder='Name'
-          name='name'
-          value={card.name}
-          onChange={handleChange}
-        />
-        <Input
-          placeholder='Company'
-          name='company'
-          value={card.company}
-          onChange={handleChange}
-        />
-        <Select name='color' value={card.color} onChange={handleChange}>
-          <option>Light</option>
-          <option>Dark</option>
-          <option>Colorful</option>
-        </Select>
-      </FlexWrapper>
-      <FlexWrapper>
-        <Input
-          placeholder='Title'
-          name='title'
-          value={card.title}
-          onChange={handleChange}
-        />
-        <Input
-          placeholder='Email'
-          name='email'
-          value={card.email}
-          onChange={handleChange}
-        />
-      </FlexWrapper>
-      <FlexWrapper>
-        <Textarea
-          placeholder='Message'
-          name='message'
-          value={card.message}
-          onChange={handleChange}
-        />
-      </FlexWrapper>
-      <FlexWrapper>
-        <UploadButton>No File</UploadButton>
-        <AddButton onClick={handleAdd}>add</AddButton>
-      </FlexWrapper>
+      <Input
+        placeholder='Name'
+        name='name'
+        value={card.name}
+        onChange={handleChange}
+      />
+      <Input
+        placeholder='Company'
+        name='company'
+        value={card.company}
+        onChange={handleChange}
+      />
+      <Select name='color' value={card.color} onChange={handleChange}>
+        <option>Light</option>
+        <option>Dark</option>
+        <option>Colorful</option>
+      </Select>
+
+      <Input
+        placeholder='Title'
+        name='title'
+        value={card.title}
+        onChange={handleChange}
+      />
+      <Input
+        placeholder='Email'
+        name='email'
+        value={card.email}
+        onChange={handleChange}
+      />
+
+      <Textarea
+        placeholder='Message'
+        name='message'
+        value={card.message}
+        onChange={handleChange}
+      />
+      <UploadButton>No File</UploadButton>
+      <AddButton onClick={handleAdd}>add</AddButton>
     </ListItemWrapper>
   );
 };
 
 export const ListItemWrapper = styled.li`
+  display: flex;
   width: 100%;
+  flex-wrap: wrap;
   list-style: none;
   border: 1px solid ${({ theme }) => theme.colors.makerGrey};
   margin-bottom: 2rem;
 `;
 
-export const FlexWrapper = styled.div`
-  display: flex;
-`;
-
 export const Input = styled.input`
-  flex: 1;
+  flex: 1 1 30%;
   padding: 0.5rem;
   height: 2rem;
 `;
 
 export const Textarea = styled.textarea`
-  flex: 1;
+  flex-basis: 100%;
   height: 3rem;
   padding: 0.5rem;
   resize: vertical;
 `;
 
 export const Select = styled.select`
-  flex: 1;
+  flex: 1 1 30%;
 `;
 
 export const UploadButton = styled.button`

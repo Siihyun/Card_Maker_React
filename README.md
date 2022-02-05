@@ -1,5 +1,5 @@
 # Card-maker
-React Card maker Using CRA, Firebase, Cloudinary.
+React Card maker Using CRA, Typescript, Emotion, Firebase, Cloudinary.
 
 A front-end project for practicing React.
 
@@ -20,6 +20,6 @@ A web application using the [CRA](https://github.com/facebook/create-react-app/t
 ## Tech/Framework Used
 * React
 * Typescript
+* Emotion
 * Firebase
 * Cloudinary
-* Emotion
